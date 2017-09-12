@@ -21,6 +21,7 @@
 		8782E3221F58E805005697F1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8782E3211F58E805005697F1 /* Extensions.swift */; };
 		8782E35D1F591DCA005697F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8782E35C1F591DCA005697F1 /* GoogleService-Info.plist */; };
 		878C01541F660D58006D5D2A /* PhotoSelectorHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C01531F660D58006D5D2A /* PhotoSelectorHeader.swift */; };
+		878C01691F665EEB006D5D2A /* SharePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C01681F665EEB006D5D2A /* SharePhotoController.swift */; };
 		87A502B01F5CB31A00235EF9 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A502AF1F5CB31A00235EF9 /* MainTabBarController.swift */; };
 		87A502B21F5CB38E00235EF9 /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A502B11F5CB38E00235EF9 /* UserProfileController.swift */; };
 		87A502CC1F5DA89E00235EF9 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A502CB1F5DA89E00235EF9 /* UserProfileHeader.swift */; };
@@ -71,6 +72,7 @@
 		8782E3211F58E805005697F1 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8782E35C1F591DCA005697F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		878C01531F660D58006D5D2A /* PhotoSelectorHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSelectorHeader.swift; sourceTree = "<group>"; };
+		878C01681F665EEB006D5D2A /* SharePhotoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharePhotoController.swift; sourceTree = "<group>"; };
 		87A502AF1F5CB31A00235EF9 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		87A502B11F5CB38E00235EF9 /* UserProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		87A502CB1F5DA89E00235EF9 /* UserProfileHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 		87798A3B1F13EE7D00CBD098 /* Instagram */ = {
 			isa = PBXGroup;
 			children = (
+				878C016A1F665EF2006D5D2A /* AddPhoto */,
 				87798A3C1F13EE7D00CBD098 /* AppDelegate.swift */,
 				87A502B51F5CB3D000235EF9 /* Model */,
 				87A502B41F5CB3CB00235EF9 /* Views */,
@@ -167,13 +170,23 @@
 			path = InstagramUITests;
 			sourceTree = "<group>";
 		};
+		878C016A1F665EF2006D5D2A /* AddPhoto */ = {
+			isa = PBXGroup;
+			children = (
+				87730C341F64396A00794705 /* PhotoSelectorController.swift */,
+				87730C361F644E8800794705 /* PhotoSelectorCell.swift */,
+				878C01531F660D58006D5D2A /* PhotoSelectorHeader.swift */,
+				878C01681F665EEB006D5D2A /* SharePhotoController.swift */,
+			);
+			name = AddPhoto;
+			sourceTree = "<group>";
+		};
 		87A502B31F5CB3C200235EF9 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				87A502D41F5E637E00235EF9 /* Login */,
 				87A502AF1F5CB31A00235EF9 /* MainTabBarController.swift */,
 				87A502B11F5CB38E00235EF9 /* UserProfileController.swift */,
-				87730C341F64396A00794705 /* PhotoSelectorController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -183,7 +196,6 @@
 			children = (
 				87A502CA1F5DA88F00235EF9 /* Header */,
 				87798A401F13EE7D00CBD098 /* Main.storyboard */,
-				87730C361F644E8800794705 /* PhotoSelectorCell.swift */,
 				87730C381F644EB100794705 /* BaseCell.swift */,
 			);
 			name = Views;
@@ -201,7 +213,6 @@
 			isa = PBXGroup;
 			children = (
 				87A502CB1F5DA89E00235EF9 /* UserProfileHeader.swift */,
-				878C01531F660D58006D5D2A /* PhotoSelectorHeader.swift */,
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -531,6 +542,7 @@
 				87A502B21F5CB38E00235EF9 /* UserProfileController.swift in Sources */,
 				87A502B01F5CB31A00235EF9 /* MainTabBarController.swift in Sources */,
 				87A502D61F5E638800235EF9 /* LoginController.swift in Sources */,
+				878C01691F665EEB006D5D2A /* SharePhotoController.swift in Sources */,
 				87730C391F644EB100794705 /* BaseCell.swift in Sources */,
 				87798A3D1F13EE7D00CBD098 /* AppDelegate.swift in Sources */,
 				8782E3221F58E805005697F1 /* Extensions.swift in Sources */,
