@@ -24,7 +24,9 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         setupLogOutButton()
         
         fetchUser()
-    
+        fetchPosts()
+        
+        
     }
     
     
@@ -81,6 +83,16 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 200)
+    }
+    
+    fileprivate func fetchPosts() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let ref = Database.database().reference().child("Posts").child(uid)
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            print(snapshot.value)
+        }) { (error) in
+            print("Failed to fetch posts:", error)
+        }
     }
     
     fileprivate func fetchUser() {
