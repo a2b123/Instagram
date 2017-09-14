@@ -18,9 +18,9 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.backgroundColor = .white
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: userProfileCellId)
+        collectionView?.register(UserProfilePhotoCell.self, forCellWithReuseIdentifier: userProfileCellId)
         collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerId)
-                
+        
         setupLogOutButton()
         
         fetchUser()
@@ -59,12 +59,12 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 16
+        return posts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: userProfileCellId, for: indexPath)
-        cell.backgroundColor = .red
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: userProfileCellId, for: indexPath) as! UserProfilePhotoCell
+        cell.post = posts[indexPath.item]
         return cell
     }
     
@@ -85,11 +85,26 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         return CGSize(width: view.frame.width, height: 200)
     }
     
+    var posts = [Post]()
+    
     fileprivate func fetchPosts() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let ref = Database.database().reference().child("Posts").child(uid)
+        let ref = Database.database().reference().child("posts").child(uid)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
-            print(snapshot.value)
+
+            guard let dictionaries = snapshot.value as? [String: Any] else { return }
+
+            dictionaries.forEach({ (key, value) in
+                print("key \(key) value: \(value)")
+                
+                guard let dictionary = value as? [String: Any] else { return }
+                let post = Post(dictionary: dictionary)
+                self.posts.append(post)
+            })
+            
+            self.collectionView?.reloadData()
+
+        
         }) { (error) in
             print("Failed to fetch posts:", error)
         }

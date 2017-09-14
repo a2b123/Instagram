@@ -26,6 +26,8 @@
 		87A502B21F5CB38E00235EF9 /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A502B11F5CB38E00235EF9 /* UserProfileController.swift */; };
 		87A502CC1F5DA89E00235EF9 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A502CB1F5DA89E00235EF9 /* UserProfileHeader.swift */; };
 		87A502D61F5E638800235EF9 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A502D51F5E638800235EF9 /* LoginController.swift */; };
+		87AAB37A1F68EFC7001B1252 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AAB3791F68EFC7001B1252 /* Post.swift */; };
+		87AAB37C1F6A16CA001B1252 /* UserProfilePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AAB37B1F6A16CA001B1252 /* UserProfilePhotoCell.swift */; };
 		B0C3E0C691D8F52EFEA5BED1 /* Pods_InstagramUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60F1794CBC15058820E5303C /* Pods_InstagramUITests.framework */; };
 		C42A4336999EECB60B19FCB5 /* Pods_InstagramTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCE54C5A680A79ADEA1B78D /* Pods_InstagramTests.framework */; };
 		C558B9E20AA14AE7B67C821A /* Pods_Instagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B026B5856CE2696CDA04101C /* Pods_Instagram.framework */; };
@@ -77,6 +79,8 @@
 		87A502B11F5CB38E00235EF9 /* UserProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		87A502CB1F5DA89E00235EF9 /* UserProfileHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		87A502D51F5E638800235EF9 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		87AAB3791F68EFC7001B1252 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		87AAB37B1F6A16CA001B1252 /* UserProfilePhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfilePhotoCell.swift; sourceTree = "<group>"; };
 		8F24C3BDCDCB7F5C049B2FA3 /* Pods-InstagramUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramUITests/Pods-InstagramUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8FCE54C5A680A79ADEA1B78D /* Pods_InstagramTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9125ED3146D51B76D0797A7F /* Pods-Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram/Pods-Instagram.debug.xcconfig"; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 				87A502CA1F5DA88F00235EF9 /* Header */,
 				87798A401F13EE7D00CBD098 /* Main.storyboard */,
 				87730C381F644EB100794705 /* BaseCell.swift */,
+				87AAB37B1F6A16CA001B1252 /* UserProfilePhotoCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -205,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				87798A431F13EE7D00CBD098 /* Instagram.xcdatamodeld */,
+				87AAB3791F68EFC7001B1252 /* Post.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -539,6 +545,8 @@
 				87A502CC1F5DA89E00235EF9 /* UserProfileHeader.swift in Sources */,
 				87798A451F13EE7D00CBD098 /* Instagram.xcdatamodeld in Sources */,
 				87730C351F64396B00794705 /* PhotoSelectorController.swift in Sources */,
+				87AAB37C1F6A16CA001B1252 /* UserProfilePhotoCell.swift in Sources */,
+				87AAB37A1F68EFC7001B1252 /* Post.swift in Sources */,
 				87A502B21F5CB38E00235EF9 /* UserProfileController.swift in Sources */,
 				87A502B01F5CB31A00235EF9 /* MainTabBarController.swift in Sources */,
 				87A502D61F5E638800235EF9 /* LoginController.swift in Sources */,
