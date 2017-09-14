@@ -13,14 +13,15 @@ class UserProfileHeader: UICollectionReusableView {
     
     var user: UserModel? {
         didSet {
-            setupProfileImage()
+            guard let profileImageUrl = user?.profileImageUrl else { return }
+            profileImageView.loadImageUsingUrlString(profileImageUrl)
             
             usernameLabel.text = user?.username
         }
     }
     
-    let profileImageView: UIImageView = {
-        let iv = UIImageView()
+    let profileImageView: CustomImageView = {
+        let iv = CustomImageView()
         iv.layer.cornerRadius = 40
         iv.clipsToBounds = true
         iv.backgroundColor = .red
@@ -147,26 +148,6 @@ class UserProfileHeader: UICollectionReusableView {
         
         _ = bottomDividerView.anchor(stackView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0.5)
         
-    }
-    
-    func setupProfileImage() {
-        guard let profileImageUrl = user?.profileImageUrl else { return }
-        
-        guard let url = URL(string: profileImageUrl) else { return }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            
-            if let error = error {
-                print("Failed to fetch profile image:", error)
-            }
-            
-            guard let data = data else { return }
-            let image = UIImage(data: data)
-                
-            // Get back on the main thread
-            DispatchQueue.main.async {
-                self.profileImageView.image = image
-            }
-        }.resume()
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -14,11 +14,11 @@ let imageCache = NSCache<NSString, UIImage>()
 
 class CustomImageView: UIImageView {
     
-    var imageUrlString: String?
+    var lastURLUsedToLoadImage: String?
     
     func loadImageUsingUrlString(_ urlString: String) {
         
-        imageUrlString = urlString
+        lastURLUsedToLoadImage = urlString
         
         let url = URL(string: urlString)
         
@@ -31,8 +31,12 @@ class CustomImageView: UIImageView {
         
         URLSession.shared.dataTask(with: url!, completionHandler: { (data, respones, error) in
             
-            if error != nil {
+            if let error = error {
                 print(error)
+                return
+            }
+            
+            if url?.absoluteString != self.lastURLUsedToLoadImage {
                 return
             }
             
@@ -40,7 +44,7 @@ class CustomImageView: UIImageView {
                 
                 let imageToCache = UIImage(data: data!)
                 
-                if self.imageUrlString == urlString {
+                if self.lastURLUsedToLoadImage == urlString {
                     self.image = imageToCache
                 }
                 
