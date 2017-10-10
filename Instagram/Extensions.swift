@@ -10,50 +10,44 @@ import UIKit
 
 // Extension for ImageCaching and Downloading Images from REST JSON
 
-let imageCache = NSCache<NSString, UIImage>()
+var imageCache = [String: UIImage]()
 
 class CustomImageView: UIImageView {
     
     var lastURLUsedToLoadImage: String?
     
-    func loadImageUsingUrlString(_ urlString: String) {
-        
+    func loadImage(urlString: String) {
         lastURLUsedToLoadImage = urlString
         
-        let url = URL(string: urlString)
-        
-        image = nil
-        
-        if let imageFromCache = imageCache.object(forKey: urlString as NSString) {
-            self.image = imageFromCache
+        if let cachedImage = imageCache[urlString] {
+            self.image = cachedImage
             return
         }
         
-        URLSession.shared.dataTask(with: url!, completionHandler: { (data, respones, error) in
-            
-            if let error = error {
-                print(error)
+        guard let url = URL(string: urlString) else { return }
+        
+        URLSession.shared.dataTask(with: url) { (data, response, err) in
+            if let err = err {
+                print("Failed to fetch post image:", err)
                 return
             }
             
-            if url?.absoluteString != self.lastURLUsedToLoadImage {
+            if url.absoluteString != self.lastURLUsedToLoadImage {
                 return
             }
             
-            DispatchQueue.main.async(execute: {
-                
-                let imageToCache = UIImage(data: data!)
-                
-                if self.lastURLUsedToLoadImage == urlString {
-                    self.image = imageToCache
-                }
-                
-                imageCache.setObject(imageToCache!, forKey: urlString as NSString)
-            })
+            guard let imageData = data else { return }
             
-        }).resume()
+            let photoImage = UIImage(data: imageData)
+            
+            imageCache[url.absoluteString] = photoImage
+            
+            DispatchQueue.main.async {
+                self.image = photoImage
+            }
+            
+            }.resume()
     }
-    
 }
 
 
@@ -289,20 +283,20 @@ extension NSMutableData {
     }
 }
 
-public extension DispatchQueue {
-    
-    private static var _onceTracker = [String]()
-    
-    public class func once(token: String, block:(Void)->Void) {
-        objc_sync_enter(self); defer { objc_sync_exit(self) }
-        
-        if _onceTracker.contains(token) {
-            return
-        }
-        
-        _onceTracker.append(token)
-        block()
-    }
-}
+//public extension DispatchQueue {
+//    
+//    private static var _onceTracker = [String]()
+//
+//    public class func once(token: String, block:(Void)->Void) {
+//        objc_sync_enter(self); defer { objc_sync_exit(self) }
+//
+//        if _onceTracker.contains(token) {
+//            return
+//        }
+//
+//        _onceTracker.append(token)
+//        block()
+//    }
+//}
 
 

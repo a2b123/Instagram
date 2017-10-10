@@ -33,7 +33,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "gear").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(logoutButtonPressed))
     }
     
-    func logoutButtonPressed() {
+    @objc func logoutButtonPressed() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { (_) in
             
@@ -95,7 +95,8 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             guard let dictionary = snapshot.value as? [String: Any] else { return }
             
             let post = Post(dictionary: dictionary)
-            self.posts.append(post)
+            self.posts.insert(post, at: 0)
+//            self.posts.append(post)
             
             self.collectionView?.reloadData()
             
@@ -113,7 +114,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             
             guard let dictionary = snapshot.value as? [String: Any] else { return }
             
-            self.user = UserModel(dictionary: dictionary)
+            self.user = UserModel(uid: uid, dictionary: dictionary)
             print(self.user ?? "")
             self.navigationItem.title = self.user?.username
             
@@ -124,19 +125,5 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         }
     }
 }
-
-struct UserModel {
-    let username: String
-    let profileImageUrl: String
-    
-    init(dictionary: [String: Any]) {
-        self.username = dictionary["Username"] as? String ?? ""
-        self.profileImageUrl = dictionary["profileImageUrl"] as? String ?? ""
-    }
-}
-
-
-
-
 
 

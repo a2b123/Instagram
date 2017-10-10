@@ -103,9 +103,7 @@ class PhotoSelctorController: UICollectionViewController, UICollectionViewDelega
                 imageManager.requestImage(for: selectedAsset, targetSize: targetSize, contentMode: .default, options: nil, resultHandler: { (image, info) in
                     header.photoImageView.image = image
                 })
-                
             }
-            
         }
         
         
@@ -153,11 +151,11 @@ class PhotoSelctorController: UICollectionViewController, UICollectionViewDelega
     }
     
     
-    func cancelButtonPressed() {
+    @objc func cancelButtonPressed() {
         dismiss(animated: true, completion: nil)
     }
     
-    func nextButtonPressed() {
+    @objc func nextButtonPressed() {
         let sharePhotoController = SharePhotoController()
         sharePhotoController.selectedImage = header?.photoImageView.image
         navigationController?.pushViewController(sharePhotoController, animated: true)

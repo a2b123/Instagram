@@ -62,10 +62,10 @@ class LoginController: UIViewController {
     let dontHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
         
-        let attributedTitle = NSMutableAttributedString(string: "Don't have an account?  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName: UIColor.lightGray])
+        let attributedTitle = NSMutableAttributedString(string: "Don't have an account?  ", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray])
         button.setAttributedTitle(attributedTitle, for: .normal)
         
-        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes:[NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14), NSForegroundColorAttributeName: UIColor.rgb(red: 17, green: 154, blue: 237)]))
+        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes:[NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.rgb(red: 17, green: 154, blue: 237)]))
         
         
         button.addTarget(self, action: #selector(dontHaveAccountButtonPressed), for: .touchUpInside)
@@ -101,7 +101,7 @@ class LoginController: UIViewController {
         
     }
     
-    func textInputHasChanged() {
+    @objc func textInputHasChanged() {
         let isFormValid = emailTextField.text?.characters.count ?? 0 > 0 && passwordTextField.text?.characters.count ?? 0 > 0
         if isFormValid {
             loginButton.isEnabled = true
@@ -142,7 +142,7 @@ class LoginController: UIViewController {
         })
     }
     
-    func dontHaveAccountButtonPressed() {
+    @objc func dontHaveAccountButtonPressed() {
         let signUpController = SignUpController()
         navigationController?.pushViewController(signUpController, animated: true)
     }

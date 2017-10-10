@@ -64,10 +64,10 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
     let alreadyHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
         
-        let attributedTitle = NSMutableAttributedString(string: "Already have an account?  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName: UIColor.lightGray])
+        let attributedTitle = NSMutableAttributedString(string: "Already have an account?  ", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray])
         button.setAttributedTitle(attributedTitle, for: .normal)
         
-        attributedTitle.append(NSAttributedString(string: "Sign In", attributes:[NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14), NSForegroundColorAttributeName: UIColor.rgb(red: 17, green: 154, blue: 237)]))
+        attributedTitle.append(NSAttributedString(string: "Sign In", attributes:[NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.rgb(red: 17, green: 154, blue: 237)]))
         
         
         button.addTarget(self, action: #selector(alreadyHaveAccountButtonPressed), for: .touchUpInside)
@@ -107,11 +107,11 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
     
     // MARK: Actions
     
-    func alreadyHaveAccountButtonPressed() {
+    @objc func alreadyHaveAccountButtonPressed() {
         navigationController?.popViewController(animated: true)
     }
     
-    func signUpButtonPressed() {
+    @objc func signUpButtonPressed() {
         guard let email = emailTextField.text, email.characters.count > 0 else {
             return }
         guard let username = userNameTextField.text, username.characters.count > 0 else {
@@ -162,7 +162,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         })
     }
     
-    func textInputHasChanged() {
+    @objc func textInputHasChanged() {
         let isFormValid = emailTextField.text?.characters.count ?? 0 > 0 && userNameTextField.text?.characters.count ?? 0 > 0 && passwordTextField.text?.characters.count ?? 0 > 0
         if isFormValid {
             signUpButton.isEnabled = true
@@ -175,7 +175,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         }
     }
     
-    func photoButtonPressed() {
+    @objc func photoButtonPressed() {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
