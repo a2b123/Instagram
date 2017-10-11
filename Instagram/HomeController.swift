@@ -29,23 +29,13 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     fileprivate func fetchPosts() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        
-        Database.database().reference().child("Users").child(uid).observe(.value, with: { (snapshot) in
-            guard let userDictionary = snapshot.value as? [String: Any] else { return }
-            
-            let user = UserModel(uid: uid, dictionary: userDictionary)
-            
+        Database.fetchUserWithUID(uid: uid) { (user) in
             self.fetchPostsWithUser(user: user)
-            
-        }) { (err) in
-            print("Failed to fetch user for posts:", err)
         }
     }
 
     fileprivate func fetchPostsWithUser(user: UserModel) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        
-        let ref = Database.database().reference().child("posts").child(uid)
+        let ref = Database.database().reference().child("posts").child(user.uid)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             guard let dictionaries = snapshot.value as? [String: Any] else { return }
             
