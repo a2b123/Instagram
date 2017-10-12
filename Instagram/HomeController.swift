@@ -18,14 +18,33 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateHomeController), name: SharePhotoController.updateFeedNotificationName, object: nil)
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
+        collectionView?.refreshControl = refreshControl
+        
         collectionView?.backgroundColor = .white
         collectionView?.register(HomePostCell.self, forCellWithReuseIdentifier: homeCellId)
         collectionView?.alwaysBounceVertical = true
         
         setupNavigationItems()
+        fetchAllPosts()
+    }
+    
+    @objc func updateHomeController() {
+        refreshCollectionView()
+    }
+    
+    @objc func refreshCollectionView() {
+        print("Handling refresh..")
+        posts.removeAll()
+        fetchAllPosts()
+    }
+    
+    fileprivate func fetchAllPosts() {
         fetchPosts()
         fetchFollowingUserIds()
-        
     }
     
     fileprivate func fetchFollowingUserIds() {
@@ -50,10 +69,15 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             self.fetchPostsWithUser(user: user)
         }
     }
+    
+    // for iOS9.. let refreshControl = UIRefreshControl()
 
     fileprivate func fetchPostsWithUser(user: UserModel) {
         let ref = Database.database().reference().child("posts").child(user.uid)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            self.collectionView?.refreshControl?.endRefreshing()
+            
             guard let dictionaries = snapshot.value as? [String: Any] else { return }
             
             dictionaries.forEach({ (key, value) in

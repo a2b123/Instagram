@@ -53,10 +53,6 @@ class SharePhotoController: UIViewController {
         _ = textView.anchor(containerView.topAnchor, left: imageView.rightAnchor, bottom: containerView.bottomAnchor, right: containerView.rightAnchor, topConstant: 0, leftConstant: 4, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
     @objc func shareButtonPressed() {
         guard let caption = textView.text, caption.characters.count > 0 else { return }
         guard let image = selectedImage else { return }
@@ -78,6 +74,8 @@ class SharePhotoController: UIViewController {
         }
     }
     
+    static let updateFeedNotificationName = NSNotification.Name(rawValue: "UpdateFeed")
+
     fileprivate func saveToDatabaseWithImageUrl(imageUrl: String) {
         guard let postImage = selectedImage else { return }
         guard let caption = textView.text else { return }
@@ -99,6 +97,13 @@ class SharePhotoController: UIViewController {
             
             print("Successfully save post to database")
             self.dismiss(animated: true, completion: nil)
+            
+            NotificationCenter.default.post(name: SharePhotoController.updateFeedNotificationName, object: nil)
+            
         }
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 }
