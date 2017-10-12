@@ -74,8 +74,8 @@ class UserProfileHeader: UICollectionReusableView {
                 } else {
                     print("Successfully followed user",  self.user?.username ?? "")
                     self.editProfileFollowButton.setTitle("Unfollow", for: .normal)
-                    self.editProfileFollowButton.backgroundColor = .white
-                    self.editProfileFollowButton.setTitleColor(.black, for: .normal)
+                    self.editProfileFollowButton.backgroundColor = .black
+                    self.editProfileFollowButton.setTitleColor(.white, for: .normal)
                 }
             }
         }

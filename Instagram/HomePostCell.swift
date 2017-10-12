@@ -31,7 +31,8 @@ class HomePostCell: BaseCell {
         
         attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 4)]))
         
-        attributedText.append(NSAttributedString(string: "1 week ago", attributes: [NSAttributedStringKey.font
+        let timeAgoDisplay = post.creationDate.timeAgoDisplay()
+        attributedText.append(NSAttributedString(string: timeAgoDisplay, attributes: [NSAttributedStringKey.font
             : UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.gray]))
         
         captionLabel.attributedText = attributedText
@@ -61,7 +62,7 @@ class HomePostCell: BaseCell {
     
     let optionsButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("***", for: .normal)
+        button.setTitle("•••", for: .normal)
         button.setTitleColor(.black, for: .normal)
         return button
     }()
@@ -102,26 +103,26 @@ class HomePostCell: BaseCell {
         backgroundColor = .white
         
         addSubview(userProfileImageView)
+        addSubview(photoImageView)
+        addSubview(usernameLabel)
+        addSubview(optionsButton)
+        addSubview(captionLabel)
+
+
         _ = userProfileImageView.anchor(topAnchor, left: leftAnchor, bottom: nil, right: nil, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 40, heightConstant: 40)
         userProfileImageView.layer.cornerRadius = 40 / 2
         
-        addSubview(photoImageView)
         _ = photoImageView.anchor(userProfileImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         photoImageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
 
-        addSubview(usernameLabel)
-        _ = usernameLabel.anchor(topAnchor, left: userProfileImageView.rightAnchor, bottom: photoImageView.topAnchor, right: rightAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        _ = usernameLabel.anchor(topAnchor, left: userProfileImageView.rightAnchor, bottom: photoImageView.topAnchor, right: optionsButton.leftAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        addSubview(optionsButton)
-        _ = optionsButton.anchor(topAnchor, left: nil, bottom: photoImageView.topAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 44, heightConstant: 44)
+        _ = optionsButton.anchor(topAnchor, left: nil, bottom: photoImageView.topAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 44, heightConstant: 0)
         
         setupActionButtons()
         
-        addSubview(captionLabel)
         _ = captionLabel.anchor(likeButton.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 0, rightConstant: 8, widthConstant: 0, heightConstant: 0)
-        
     }
-    
     
     fileprivate func setupActionButtons() {
         let stackView = UIStackView(arrangedSubviews: [likeButton, commentButton, sendMessageButton])
