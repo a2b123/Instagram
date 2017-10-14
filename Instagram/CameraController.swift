@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class CameraController: UIViewController {
+class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
     
     let dismissButton: UIButton = {
         let button = UIButton(type: .system)
@@ -27,9 +27,6 @@ class CameraController: UIViewController {
     
     // MARK: Actions
     
-    @objc func capturePhotoButtonPressed() {
-        print("Capturing photo..")
-    }
     
     @objc func dismissButtonPressed() {
         dismiss(animated: true, completion: nil)
@@ -53,7 +50,35 @@ class CameraController: UIViewController {
         _ = dismissButton.anchor(view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 12, widthConstant: 50, heightConstant: 50)
     }
     
+    // MARK: Capture Photo
+    @objc func capturePhotoButtonPressed() {
+        print("Capturing photo..")
+        
+        let settings = AVCapturePhotoSettings()
+        
+        guard let previewFormatType = settings.availablePreviewPhotoPixelFormatTypes.first else { return }
+        settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewFormatType]
+        
+        output.capturePhoto(with: settings, delegate: self)
+    }
+    
+    func photoOutput(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
+
+        let imageData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer!, previewPhotoSampleBuffer: previewPhotoSampleBuffer!)
+        
+        let previewImage = UIImage(data: imageData!)
+        
+        let previewImageView = UIImageView(image: previewImage)
+        view.addSubview(previewImageView)
+        _ = previewImageView.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        
+        print("Finished processing photo sample buffer...")
+
+    }
+
     let output = AVCapturePhotoOutput()
+    
     fileprivate func setupCaptureSession() {
         let captureSession = AVCaptureSession()
         
