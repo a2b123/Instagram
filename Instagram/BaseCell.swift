@@ -21,7 +21,7 @@ class BaseCell: UICollectionViewCell {
     
     
     func setupView() {
-        backgroundColor = .cyan
+        backgroundColor = .white
     }
 }
 
