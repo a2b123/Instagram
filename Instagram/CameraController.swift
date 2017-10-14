@@ -67,13 +67,20 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
         let imageData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer!, previewPhotoSampleBuffer: previewPhotoSampleBuffer!)
         
         let previewImage = UIImage(data: imageData!)
+        let containerView = PreviewPhotoContainerView()
+        containerView.previewImageView.image = previewImage
+        view.addSubview(containerView)
+        _ = containerView.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
+        
+        /* Commented out below code because we now have PreviewContainerView - easier to maintan using that moving forward
+         
         let previewImageView = UIImageView(image: previewImage)
         view.addSubview(previewImageView)
         _ = previewImageView.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-        
-        
+    
         print("Finished processing photo sample buffer...")
+        */
 
     }
 
