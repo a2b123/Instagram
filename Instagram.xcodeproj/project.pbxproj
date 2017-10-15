@@ -11,6 +11,8 @@
 		871171471F8DE516002D0BA8 /* UserSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871171461F8DE516002D0BA8 /* UserSearchController.swift */; };
 		8711714B1F8DEE56002D0BA8 /* UserSearchCell .swift in Sources */ = {isa = PBXBuildFile; fileRef = 8711714A1F8DEE56002D0BA8 /* UserSearchCell .swift */; };
 		875CB3B91F92AC370074A0EE /* PreviewPhotoContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875CB3B81F92AC370074A0EE /* PreviewPhotoContainerView.swift */; };
+		875CB3BB1F92D9D40074A0EE /* CustomAnimationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875CB3BA1F92D9D40074A0EE /* CustomAnimationPresenter.swift */; };
+		875CB3BD1F92E3B60074A0EE /* CustomAnimatorDismisser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875CB3BC1F92E3B60074A0EE /* CustomAnimatorDismisser.swift */; };
 		875CF3F41F8F507700957A55 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875CF3F31F8F507700957A55 /* CameraController.swift */; };
 		87730C351F64396B00794705 /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87730C341F64396A00794705 /* PhotoSelectorController.swift */; };
 		87730C371F644E8800794705 /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87730C361F644E8800794705 /* PhotoSelectorCell.swift */; };
@@ -66,6 +68,8 @@
 		871171461F8DE516002D0BA8 /* UserSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchController.swift; sourceTree = "<group>"; };
 		8711714A1F8DEE56002D0BA8 /* UserSearchCell .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserSearchCell .swift"; sourceTree = "<group>"; };
 		875CB3B81F92AC370074A0EE /* PreviewPhotoContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPhotoContainerView.swift; sourceTree = "<group>"; };
+		875CB3BA1F92D9D40074A0EE /* CustomAnimationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimationPresenter.swift; sourceTree = "<group>"; };
+		875CB3BC1F92E3B60074A0EE /* CustomAnimatorDismisser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimatorDismisser.swift; sourceTree = "<group>"; };
 		875CF3F31F8F507700957A55 /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		87730C341F64396A00794705 /* PhotoSelectorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
 		87730C361F644E8800794705 /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
@@ -138,6 +142,8 @@
 			children = (
 				875CF3F31F8F507700957A55 /* CameraController.swift */,
 				875CB3B81F92AC370074A0EE /* PreviewPhotoContainerView.swift */,
+				875CB3BA1F92D9D40074A0EE /* CustomAnimationPresenter.swift */,
+				875CB3BC1F92E3B60074A0EE /* CustomAnimatorDismisser.swift */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -584,6 +590,7 @@
 				87AAB3851F6A5918001B1252 /* HomePostCell.swift in Sources */,
 				87798A3F1F13EE7D00CBD098 /* SignUpController.swift in Sources */,
 				87A502CC1F5DA89E00235EF9 /* UserProfileHeader.swift in Sources */,
+				875CB3BB1F92D9D40074A0EE /* CustomAnimationPresenter.swift in Sources */,
 				87798A451F13EE7D00CBD098 /* Instagram.xcdatamodeld in Sources */,
 				871171451F8DE0E5002D0BA8 /* FirebaseUtils.swift in Sources */,
 				875CF3F41F8F507700957A55 /* CameraController.swift in Sources */,
@@ -600,6 +607,7 @@
 				87AAB37E1F6A5533001B1252 /* HomeController.swift in Sources */,
 				87798A3D1F13EE7D00CBD098 /* AppDelegate.swift in Sources */,
 				8711714B1F8DEE56002D0BA8 /* UserSearchCell .swift in Sources */,
+				875CB3BD1F92E3B60074A0EE /* CustomAnimatorDismisser.swift in Sources */,
 				8782E3221F58E805005697F1 /* Extensions.swift in Sources */,
 				87D481011F8C2B96004851BC /* UserModel.swift in Sources */,
 				87730C371F644E8800794705 /* PhotoSelectorCell.swift in Sources */,
