@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol HomePostCellDelegate {
+    func didTapComment(post: PostModel)
+}
+
 class HomePostCell: BaseCell {
     
-    var post: Post? {
+    var delegate: HomePostCellDelegate?
+
+    var post: PostModel? {
         didSet {
             guard let postImageUrl = post?.imageUrl else { return }
             photoImageView.loadImage(urlString: postImageUrl)
@@ -73,9 +79,10 @@ class HomePostCell: BaseCell {
         return button
     }()
 
-    let commentButton: UIButton = {
+    lazy var commentButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "comment").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(self, action: #selector(commentButtonPressed), for: .touchUpInside)
         return button
     }()
 
@@ -96,6 +103,12 @@ class HomePostCell: BaseCell {
         label.numberOfLines = 0
         return label
     }()
+    
+    @objc fileprivate func commentButtonPressed() {
+        print("Trying to show comments...")
+        guard let post = post else { return }
+        delegate?.didTapComment(post: post)
+    }
     
     override func setupView() {
         super.setupView()

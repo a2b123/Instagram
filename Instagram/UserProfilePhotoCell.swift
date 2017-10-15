@@ -10,7 +10,7 @@ import UIKit
 
 class UserProfilePhotoCell: BaseCell {
     
-    var post: Post? {
+    var post: PostModel? {
         didSet {
             guard let  imageUrl = post?.imageUrl else { return }
             guard let urlImage = URL(string: imageUrl) else { return }

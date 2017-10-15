@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Post {
+struct PostModel {
     let user: UserModel
     let imageUrl: String
     let caption: String

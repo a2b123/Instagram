@@ -85,7 +85,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         return CGSize(width: view.frame.width, height: 200)
     }
     
-    var posts = [Post]()
+    var posts = [PostModel]()
     
     // need to implament pagination of data
     fileprivate func fetchOrderedPosts() {
@@ -97,7 +97,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             
             guard let user = self.user else { return }
             
-            let post = Post(user: user, dictionary: dictionary)
+            let post = PostModel(user: user, dictionary: dictionary)
             self.posts.insert(post, at: 0)
             
             self.collectionView?.reloadData()
