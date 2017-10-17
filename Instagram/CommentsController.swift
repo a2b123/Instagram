@@ -9,16 +9,37 @@
 import UIKit
 import Firebase
 
-class CommentsController: UICollectionViewController {
-    
+class CommentsController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    private let commentsCellId = "commentsCellId"
     var post: PostModel?
+    var comments = [CommentModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.backgroundColor = .red
-        
+        collectionView?.register(CommentCell.self, forCellWithReuseIdentifier: commentsCellId)
+        collectionView?.alwaysBounceVertical = true
+        collectionView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -50, right: 0)
+        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: -50, right: 0)
         navigationItem.title = "Comments"
         
+        fetchComments()
+    }
+    
+    fileprivate func fetchComments() {
+        guard let postId = self.post?.id else { return }
+        let ref = Database.database().reference().child("Comments").child(postId)
+        ref.observe(.childAdded, with: { (snapshot) in
+            
+            guard let dictionary = snapshot.value as? [String: Any] else { return }
+            let comment = CommentModel(dictionary: dictionary)
+            
+            self.comments.append(comment)
+            self.collectionView?.reloadData()
+            
+        }) { (err) in
+            print("Failed to fetch / observe comments")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,6 +50,21 @@ class CommentsController: UICollectionViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         tabBarController?.tabBar.isHidden = false
+    }
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return comments.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentsCellId, for: indexPath) as! CommentCell
+        cell.comment = self.comments[indexPath.item]
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 50)
     }
     
     lazy var containerView: UIView = {
