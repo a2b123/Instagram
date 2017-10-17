@@ -9,10 +9,13 @@
 import Foundation
 
 struct CommentModel {
+    var user: UserModel
+    
     let text: String
     let uid: String
     
-    init(dictionary: [String: Any]) {
+    init(user: UserModel, dictionary: [String: Any]) {
+        self.user = user
         self.text = dictionary["text"] as? String ?? ""
         self.uid = dictionary["uid"] as? String ?? ""
     }

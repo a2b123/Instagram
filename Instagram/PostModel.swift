@@ -17,6 +17,7 @@ struct PostModel {
     let caption: String
     let creationDate: Date
     
+    var hasLiked: Bool = false
     
     init(user: UserModel, dictionary: [String: Any]) {
         self.user = user

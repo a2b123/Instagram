@@ -10,6 +10,7 @@ import UIKit
 
 protocol HomePostCellDelegate {
     func didTapComment(post: PostModel)
+    func didLike(for cell: HomePostCell)
 }
 
 class HomePostCell: BaseCell {
@@ -21,6 +22,8 @@ class HomePostCell: BaseCell {
             guard let postImageUrl = post?.imageUrl else { return }
             photoImageView.loadImage(urlString: postImageUrl)
             
+            likeButton.setImage(post?.hasLiked == true ? #imageLiteral(resourceName: "like_selected").withRenderingMode(.alwaysOriginal) : #imageLiteral(resourceName: "like_unselected").withRenderingMode(.alwaysOriginal), for: .normal)
+
             usernameLabel.text = post?.user.username
             guard let profileImageUrl = post?.user.profileImageUrl else { return }
             userProfileImageView.loadImage(urlString: profileImageUrl)
@@ -73,9 +76,10 @@ class HomePostCell: BaseCell {
         return button
     }()
     
-    let likeButton: UIButton = {
+    lazy var likeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "like_unselected").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(self, action: #selector(likeButtonPressed), for: .touchUpInside)
         return button
     }()
 
@@ -103,6 +107,11 @@ class HomePostCell: BaseCell {
         label.numberOfLines = 0
         return label
     }()
+    
+    @objc fileprivate func likeButtonPressed() {
+        print("Like button pressed")
+        delegate?.didLike(for: self)
+    }
     
     @objc fileprivate func commentButtonPressed() {
         print("Trying to show comments...")
