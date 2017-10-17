@@ -9,6 +9,9 @@
 import Foundation
 
 struct PostModel {
+    
+    var id: String?
+    
     let user: UserModel
     let imageUrl: String
     let caption: String
