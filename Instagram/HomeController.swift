@@ -11,9 +11,10 @@ import Firebase
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate {
     
-    
     private let homeCellId = "homeCellId"
     
+    var userId: String?
+        
     var posts = [PostModel]()
     
     override func viewDidLoad() {

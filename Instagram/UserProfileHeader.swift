@@ -9,7 +9,14 @@
 import UIKit
 import Firebase
 
-class UserProfileHeader: UICollectionReusableView {
+protocol UserProfileHeaderDelegate {
+    func didChangeToListView()
+    func didChangeToGridView()
+}
+
+class UserProfileHeader: UICollectionViewCell {
+    
+    var delegate: UserProfileHeaderDelegate?
     
     var user: UserModel? {
         didSet {
@@ -97,23 +104,26 @@ class UserProfileHeader: UICollectionReusableView {
         return iv
     }()
     
-    let gridButton: UIButton = {
+    lazy var gridButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "grid"), for: .normal)
+        button.addTarget(self, action: #selector(changeToGridView), for: .touchUpInside)
         return button
     }()
     
-    let listButton: UIButton = {
+    lazy var listButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "grid"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "list"), for: .normal)
         button.tintColor = UIColor(white: 0, alpha: 0.1)
+        button.addTarget(self, action: #selector(changeToListView), for: .touchUpInside)
         return button
     }()
 
-    let bookmarkButton: UIButton = {
+    lazy var bookmarkButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "ribbon"), for: .normal)
         button.tintColor = UIColor(white: 0, alpha: 0.2)
+        button.addTarget(self, action: #selector(bookmarkButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -165,7 +175,24 @@ class UserProfileHeader: UICollectionReusableView {
         button.addTarget(self, action: #selector(editProfileButtonPressed), for: .touchUpInside)
         return button
     }()
+
+    @objc fileprivate func changeToGridView() {
+        print("Change to Grid View Pressed")
+        gridButton.tintColor = .mainBlue()
+        listButton.tintColor = UIColor(white: 0, alpha: 0.2)
+        delegate?.didChangeToGridView()
+    }
     
+    @objc fileprivate func changeToListView() {
+        print("Changed to List View Pressed")
+        listButton.tintColor = .mainBlue()
+        gridButton.tintColor = UIColor(white: 0, alpha: 0.2)
+        delegate?.didChangeToListView()
+    }
+    
+    @objc fileprivate func bookmarkButtonPressed() {
+        print("Bookmark Button Pressed")
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
