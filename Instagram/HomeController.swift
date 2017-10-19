@@ -75,7 +75,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     // for iOS9.. let refreshControl = UIRefreshControl()
 
     fileprivate func fetchPostsWithUser(user: UserModel) {
-        let ref = Database.database().reference().child("posts").child(user.uid)
+        let ref = Database.database().reference().child("Posts").child(user.uid)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             
             self.collectionView?.refreshControl?.endRefreshing()
